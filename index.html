@@ -1,237 +1,208 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu du Restaurant - La Belle Table</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Menu del Ristorante</title>
     <style>
+        /* Reset et styles de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
+            font-family: 'Arial', sans-serif;
             background-color: #f8f5f0;
             color: #333;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
+        /* Page de chargement */
+        #loading-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: #2c3e50;
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
         }
         
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+        .loading-content {
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #e67e22;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.8rem;
             font-weight: 300;
             letter-spacing: 2px;
         }
         
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        /* En-tête */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .header-content {
             max-width: 800px;
-            margin: 0 auto;
         }
         
         .restaurant-name {
-            color: #e67e22;
-            font-weight: 600;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
         }
         
-        .menu-section {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            color: #2c3e50;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 3px;
-            background-color: #e67e22;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .menu-intro {
-            text-align: center;
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto 50px;
-            color: #555;
-            line-height: 1.8;
-        }
-        
-        .menu-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        
-        .menu-category {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .menu-category:hover {
-            transform: translateY(-10px);
-        }
-        
-        .category-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px dashed #e67e22;
-            text-align: center;
-        }
-        
-        .menu-item {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .menu-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        
-        .item-name {
+        .restaurant-tagline {
             font-size: 1.3rem;
-            font-weight: 600;
-            color: #2c3e50;
+            font-style: italic;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
         
-        .item-price {
-            font-size: 1.2rem;
-            font-weight: 700;
+        .menu-title {
+            font-size: 2.5rem;
             color: #e67e22;
+            border-bottom: 2px solid #e67e22;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
         
-        .item-description {
-            color: #666;
-            font-size: 0.95rem;
+        /* Section des images */
+        .menu-images-section {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
-        .image-section {
-            padding: 40px 0 80px;
+        .section-intro {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+            color: #555;
         }
         
-        .image-container {
+        .highlight {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        .images-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
         }
         
-        .dish-image {
+        .menu-image-card {
             width: 100%;
-            max-width: 500px;
-            border-radius: 12px;
+            max-width: 600px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.4s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: white;
         }
         
-        .dish-image:hover {
-            transform: scale(1.03);
+        .menu-image-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
         
-        .dish-image img {
+        .image-wrapper {
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .menu-img {
             width: 100%;
-            height: 350px;
+            height: 100%;
             object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
         }
         
-        .dish-image:hover img {
-            transform: scale(1.05);
+        .menu-image-card:hover .menu-img {
+            transform: scale(1.1);
         }
         
         .image-caption {
-            padding: 20px;
-            background-color: white;
+            padding: 25px;
             text-align: center;
         }
         
-        .image-caption h3 {
-            font-size: 1.5rem;
+        .image-title {
+            font-size: 1.8rem;
             color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         
-        .image-caption p {
+        .image-description {
             color: #666;
-            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
         
+        /* Footer */
         footer {
             background-color: #2c3e50;
             color: white;
-            padding: 40px 0;
+            padding: 40px 20px;
             text-align: center;
         }
         
         .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .footer-logo {
+        .footer-title {
             font-size: 1.8rem;
             margin-bottom: 20px;
             color: #e67e22;
-        }
-        
-        .footer-info {
-            max-width: 600px;
-            margin-bottom: 20px;
         }
         
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 30px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            gap: 30px;
+            margin-top: 30px;
         }
         
         .contact-item {
@@ -240,198 +211,132 @@
             gap: 10px;
         }
         
-        .contact-item i {
+        .icon {
             color: #e67e22;
+            font-size: 1.2rem;
         }
         
+        /* Responsive */
         @media (max-width: 768px) {
-            .menu-container {
-                grid-template-columns: 1fr;
+            .restaurant-name {
+                font-size: 2.5rem;
             }
             
-            .image-container {
-                flex-direction: column;
-                align-items: center;
+            .menu-title {
+                font-size: 2rem;
             }
             
-            .dish-image {
-                max-width: 100%;
+            .image-wrapper {
+                height: 300px;
             }
             
-            header h1 {
-                font-size: 2.2rem;
+            .menu-images-section {
+                padding: 50px 20px;
             }
-        }
-        
-        .highlight {
-            color: #e67e22;
-            font-weight: 600;
         }
     </style>
 </head>
 <body>
+    <!-- Page de chargement -->
+    <div id="loading-page">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <div class="loading-text">Sta caricando...</div>
+        </div>
+    </div>
+
+    <!-- En-tête -->
     <header>
-        <div class="container">
-            <h1>Notre <span class="restaurant-name">Menu</span></h1>
-            <p>Découvrez nos spécialités culinaires préparées avec des ingrédients frais et de saison</p>
+        <div class="header-content">
+            <h1 class="restaurant-name">Ristorante Bella Italia</h1>
+            <p class="restaurant-tagline">Autentica cucina italiana dal 1985</p>
+            <h2 class="menu-title">Il Nostro Menu</h2>
         </div>
     </header>
-    
-    <section class="menu-section">
-        <div class="container">
-            <h2 class="section-title">Carte du Restaurant</h2>
-            <p class="menu-intro">Notre chef vous propose une cuisine raffinée mêlant traditions et créativité. Tous nos plats sont préparés sur place avec des produits frais et locaux.</p>
-            
-            <div class="menu-container">
-                <div class="menu-category">
-                    <h3 class="category-title"><i class="fas fa-utensils"></i> Entrées</h3>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Tartare de saumon</div>
-                            <div class="item-price">14€</div>
-                        </div>
-                        <p class="item-description">Saumon frais, avocat, citron vert et fines herbes, servi avec des toasts</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Foie gras maison</div>
-                            <div class="item-price">18€</div>
-                        </div>
-                        <p class="item-description">Foie gras de canard mi-cuit, chutney de figues et pain d'épices</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Salade gourmande</div>
-                            <div class="item-price">12€</div>
-                        </div>
-                        <p class="item-description">Mélange de jeunes pousses, magret de canard fumé, noix et vinaigrette au miel</p>
-                    </div>
+
+    <!-- Section des images de menu -->
+    <section class="menu-images-section">
+        <p class="section-intro">
+            Scopri le specialità della nostra cucina attraverso i nostri piatti più iconici. 
+            Ogni piatto è preparato con <span class="highlight">ingredienti freschi</span> e selezionati, 
+            seguendo le <span class="highlight">ricette tradizionali italiane</span> tramandate di generazione in generazione.
+        </p>
+        
+        <div class="images-container">
+            <!-- Première image de menu -->
+            <div class="menu-image-card">
+                <div class="image-wrapper">
+                    <img src="Menu1.jpg" alt="Menu del Giorno - Primi Piatti" class="menu-img">
                 </div>
-                
-                <div class="menu-category">
-                    <h3 class="category-title"><i class="fas fa-drumstick-bite"></i> Plats Principaux</h3>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Filet de boeuf</div>
-                            <div class="item-price">28€</div>
-                        </div>
-                        <p class="item-description">Filet de boeuf Charolais, sauce au poivre vert, gratin dauphinois et haricots verts</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Bar de ligne</div>
-                            <div class="item-price">26€</div>
-                        </div>
-                        <p class="item-description">Bar grillé, risotto crémeux aux asperges vertes et émulsion au citron</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Carré d'agneau</div>
-                            <div class="item-price">32€</div>
-                        </div>
-                        <p class="item-description">Carré d'agneau rôti, ratatouille provençale et purée d'ail confit</p>
-                    </div>
-                </div>
-                
-                <div class="menu-category">
-                    <h3 class="category-title"><i class="fas fa-ice-cream"></i> Desserts</h3>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Fondant au chocolat</div>
-                            <div class="item-price">10€</div>
-                        </div>
-                        <p class="item-description">Fondant au chocolat noir cœur coulant, glace à la vanille de Madagascar</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Tarte tatin</div>
-                            <div class="item-price">9€</div>
-                        </div>
-                        <p class="item-description">Tarte tatin aux pommes caramélisées, crème fraîche fouettée</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-header">
-                            <div class="item-name">Assiette de fromages</div>
-                            <div class="item-price">12€</div>
-                        </div>
-                        <p class="item-description">Sélection de fromages affinés, noix, raisins et confiture de figues</p>
-                    </div>
+                <div class="image-caption">
+                    <h3 class="image-title">Menu del Giorno</h3>
+                    <p class="image-description">
+                        Una selezione dei nostri migliori primi piatti italiani: pasta fresca fatta in casa, 
+                        risotti cremosi e zuppe tradizionali. Ogni giorno proponiamo specialità diverse 
+                        secondo la stagionalità degli ingredienti.
+                    </p>
                 </div>
             </div>
             
-            <p style="text-align: center; font-style: italic; color: #777;">
-                <span class="highlight">Menu dégustation</span> disponible sur demande - Prix: 65€ par personne
-            </p>
-        </div>
-    </section>
-    
-    <section class="image-section">
-        <div class="container">
-            <h2 class="section-title">Nos Spécialités</h2>
-            <div class="image-container">
-                <div class="dish-image">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Plat spécial du chef">
-                    <div class="image-caption">
-                        <h3>Filet de Boeuf Charolais</h3>
-                        <p>Notre spécialité maison, accompagnée de gratin dauphinois et de sauce au poivre vert</p>
-                    </div>
+            <!-- Deuxième image de menu -->
+            <div class="menu-image-card">
+                <div class="image-wrapper">
+                    <img src="Menu2.jpg" alt="Menu della Sera - Specialità" class="menu-img">
                 </div>
-                
-                <div class="dish-image">
-                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Dessert gourmand">
-                    <div class="image-caption">
-                        <h3>Fondant au Chocolat</h3>
-                        <p>Notre dessert signature avec un cœur coulant et une glace à la vanille de Madagascar</p>
-                    </div>
+                <div class="image-caption">
+                    <h3 class="image-title">Menu della Sera</h3>
+                    <p class="image-description">
+                        Le nostre specialità serali: secondi piatti di carne e pesce, accompagnati 
+                        da contorni freschi e deliziosi antipasti. Completa la tua esperienza con 
+                        i nostri dessert fatti in casa e la selezione di vini italiani.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Pied de page -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">La Belle Table</div>
-                <div class="footer-info">
-                    <p>Restaurant gastronomique ouvert du mardi au dimanche, midi et soir.</p>
-                    <p>Réservation recommandée</p>
+        <div class="footer-content">
+            <h3 class="footer-title">Ristorante Bella Italia</h3>
+            <p>Vi aspettiamo per farvi gustare l'autentica cucina italiana in un'atmosfera accogliente e raffinata.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="icon">📍</span>
+                    <span>Via Roma 123, 00100 Roma, Italia</span>
                 </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>12 Rue de la Gastronomie, 75008 Paris</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>01 23 45 67 89</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@labelletable.fr</span>
-                    </div>
+                <div class="contact-item">
+                    <span class="icon">📞</span>
+                    <span>+39 06 1234 5678</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">🕒</span>
+                    <span>Aperto tutti i giorni 12:00-15:00, 19:00-23:00</span>
                 </div>
             </div>
         </div>
     </footer>
-    
+
     <script>
-        // Animation simple pour les éléments du menu
+        // Gestion de la page de chargement
         document.addEventListener('DOMContentLoaded', function() {
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach((item, index) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 100 + index * 100);
-            });
+            const loadingPage = document.getElementById('loading-page');
             
-            // Note pour l'utilisateur
-            console.log("Pour utiliser vos propres images, remplacez les URLs dans les balises img par 'Menu1.jpg' et 'Menu2.jpg'");
+            // Simuler un temps de chargement
+            setTimeout(function() {
+                loadingPage.style.opacity = '0';
+                loadingPage.style.visibility = 'hidden';
+                
+                // Supprimer la page de chargement après la transition
+                setTimeout(function() {
+                    loadingPage.style.display = 'none';
+                }, 500);
+            }, 1500); // 1.5 secondes de chargement
         });
+        
+        // Message pour l'utilisateur
+        console.log("Assicurati che le immagini Menu1.jpg e Menu2.jpg siano nella stessa cartella di questo file HTML.");
     </script>
 </body>
 </html>
