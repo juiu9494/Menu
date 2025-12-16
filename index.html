@@ -1,1430 +1,527 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROYAL – MENÙ BEVANDE</title>
+    <title>Royal - Nos Menus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset et base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: 'Playfair Display', 'Times New Roman', serif;
-            background: #0a0a0a;
-            color: #e8d8b6;
+            background-color: #f8f5f0;
+            color: #333;
             line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
         }
-
-        /* Effet de texture dorée en arrière-plan */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.02) 0%, transparent 50%);
-            z-index: -2;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        /* Page de chargement */
-        #loading-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0a0a0a;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        
+        /* Header et logo */
+        header {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-
-        .loading-content {
-            text-align: center;
-        }
-
-        .royal-crown {
-            font-size: 5rem;
-            color: #d4af37;
-            margin-bottom: 30px;
-            animation: crown-rotate 3s ease-in-out infinite;
-        }
-
-        @keyframes crown-rotate {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
-        }
-
-        .loading-text {
-            color: #d4af37;
-            font-size: 2.5rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            font-weight: 300;
-            position: relative;
-            padding-bottom: 20px;
-        }
-
-        .loading-text::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            animation: line-grow 2s ease-in-out infinite;
-        }
-
-        @keyframes line-grow {
-            0%, 100% { width: 0; opacity: 0; }
-            50% { width: 200px; opacity: 1; }
-        }
-
-        /* Header avec logo */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid #d4af37;
-            z-index: 100;
-            padding: 20px 40px;
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
         }
-
+        
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
-
-        .royal-logo {
-            font-size: 3.5rem;
-            font-weight: 700;
+        
+        .logo {
+            font-size: 2.8rem;
             color: #d4af37;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
-            font-family: 'Playfair Display', serif;
         }
-
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, #f7ef8a, #d4af37);
+            border-radius: 2px;
+        }
+        
         .logo-subtitle {
-            font-size: 1.2rem;
-            color: #b8a577;
+            font-size: 1rem;
+            color: #d4af37;
             font-style: italic;
-            letter-spacing: 2px;
-            border-left: 2px solid #d4af37;
-            padding-left: 15px;
+            letter-spacing: 1px;
+            margin-top: 5px;
         }
-
-        .nav-menu {
+        
+        /* Navigation */
+        nav ul {
             display: flex;
+            list-style: none;
             gap: 30px;
         }
-
-        .nav-item {
-            color: #e8d8b6;
+        
+        nav a {
+            color: #fff;
             text-decoration: none;
-            font-size: 1.1rem;
             font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            transition: color 0.3s;
             position: relative;
-            overflow: hidden;
         }
-
-        .nav-item::before {
+        
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        nav a::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
-            transition: left 0.5s ease;
         }
-
-        .nav-item:hover::before {
-            left: 100%;
-        }
-
-        .nav-item:hover {
-            color: #d4af37;
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        /* Contenu principal */
-        .main-content {
-            margin-top: 120px;
-            padding: 40px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* En-tête du menu */
-        .menu-header {
+        
+        /* Section principale */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
             text-align: center;
+            padding: 100px 20px;
             margin-bottom: 60px;
-            position: relative;
-            padding-bottom: 40px;
         }
-
-        .menu-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
-
-        .menu-title {
-            font-size: 4.5rem;
-            color: #d4af37;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            margin-bottom: 15px;
-            text-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #f0f0f0;
         }
-
-        .menu-subtitle {
-            font-size: 1.8rem;
-            color: #b8a577;
-            font-style: italic;
-            letter-spacing: 3px;
+        
+        /* Section menus */
+        .menus-section {
+            padding: 40px 0 80px;
         }
-
-        /* Sections du menu */
-        .menu-section {
-            margin-bottom: 80px;
-            position: relative;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .section-icon {
-            font-size: 2.5rem;
-            color: #d4af37;
-            margin-right: 20px;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #d4af37;
-            border-radius: 50%;
-        }
-
+        
         .section-title {
-            font-size: 2.8rem;
-            color: #e8d8b6;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #1a1a1a;
             position: relative;
         }
-
+        
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100px;
-            height: 2px;
-            background: #d4af37;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #d4af37;
+            border-radius: 2px;
         }
-
-        /* Grille des produits */
-        .products-grid {
+        
+        .menus-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
         }
-
-        .product-card {
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            position: relative;
+        
+        .menu-card {
+            background-color: #fff;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s, box-shadow 0.4s;
         }
-
-        .product-card::before {
+        
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .menu-card:hover .menu-img {
+            transform: scale(1.05);
+        }
+        
+        .menu-info {
+            padding: 25px;
+        }
+        
+        .menu-title {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .menu-desc {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .menu-btn {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #1a1a1a;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background-color: #c19b2c;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 50px 0 30px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #d4af37;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
-            background: #d4af37;
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
+            width: 50px;
+            height: 2px;
+            background-color: #d4af37;
         }
-
-        .product-card:hover::before {
-            transform: scaleY(1);
+        
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
         }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .product-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .product-name {
-            font-size: 1.8rem;
-            color: #e8d8b6;
-            font-weight: 500;
-            line-height: 1.4;
-            flex: 1;
-        }
-
-        .product-price {
-            font-size: 1.8rem;
+        
+        .footer-column a:hover {
             color: #d4af37;
-            font-weight: 700;
-            margin-left: 20px;
-            white-space: nowrap;
         }
-
-        .product-description {
-            color: #b8a577;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            font-style: italic;
-            margin-top: 10px;
-        }
-
-        .product-details {
+        
+        .social-icons {
             display: flex;
             gap: 15px;
             margin-top: 15px;
-            flex-wrap: wrap;
         }
-
-        .product-tag {
-            background: rgba(212, 175, 55, 0.1);
-            color: #d4af37;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        /* Styles spécifiques pour certaines sections */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .beer-size {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed rgba(212, 175, 55, 0.2);
-        }
-
-        .size-price {
-            display: flex;
-            gap: 20px;
-        }
-
-        /* Footer */
-        .main-footer {
-            text-align: center;
-            padding: 60px 40px;
-            margin-top: 100px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            position: relative;
-        }
-
-        .footer-logo {
-            font-size: 3rem;
-            color: #d4af37;
-            margin-bottom: 20px;
-            letter-spacing: 5px;
-        }
-
-        .footer-text {
-            color: #b8a577;
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
+        
+        .social-icons a {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #e8d8b6;
-            font-size: 1.1rem;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            transition: background-color 0.3s;
         }
-
-        .contact-icon {
-            color: #d4af37;
-            font-size: 1.5rem;
+        
+        .social-icons a:hover {
+            background-color: #d4af37;
         }
-
+        
         .copyright {
-            margin-top: 60px;
-            color: #777;
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #999;
             font-size: 0.9rem;
-            letter-spacing: 2px;
         }
-
+        
         /* Responsive */
-        @media (max-width: 1200px) {
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            }
-            
-            .menu-title {
-                font-size: 3.8rem;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .main-content {
-                padding: 20px;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
-            
-            .main-header {
-                flex-direction: column;
-                gap: 20px;
-                padding: 15px 20px;
-            }
-            
-            .nav-menu {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .menu-title {
-                font-size: 3rem;
-                letter-spacing: 6px;
-            }
-        }
-
         @media (max-width: 768px) {
-            .menu-title {
-                font-size: 2.5rem;
-                letter-spacing: 4px;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .product-name {
-                font-size: 1.5rem;
-            }
-            
-            .product-price {
-                font-size: 1.5rem;
-            }
-            
-            .royal-logo {
-                font-size: 2.5rem;
-            }
-            
-            .contact-info {
+            .header-content {
                 flex-direction: column;
+                text-align: center;
                 gap: 20px;
             }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .menus-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 25px;
+            }
         }
-
-        @media (max-width: 576px) {
-            .menu-title {
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 70px 15px;
+            }
+            
+            .hero h1 {
                 font-size: 2rem;
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
-            .product-card {
-                padding: 20px;
-            }
-            
-            .product-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .product-price {
-                margin-left: 0;
+            .menus-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Page de chargement -->
-    <div id="loading-page">
-        <div class="loading-content">
-            <div class="royal-crown">👑</div>
-            <div class="loading-text">ROYAL</div>
+    <!-- En-tête avec logo -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <div>
+                    <div class="logo">Royal</div>
+                    <div class="logo-subtitle">Cuisine d'exception</div>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="#"><i class="fas fa-utensils"></i> Menus</a></li>
+                    <li><a href="#"><i class="fas fa-wine-glass-alt"></i> Carte des vins</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> À propos</a></li>
+                    <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-
-    <!-- Header -->
-    <header class="main-header">
-        <div class="logo-container">
-            <div class="royal-logo">ROYAL</div>
-            <div class="logo-subtitle">Menù Bevande</div>
-        </div>
-        <nav class="nav-menu">
-            <a href="#distillati" class="nav-item">Distillati</a>
-            <a href="#cocktails" class="nav-item">Cocktails</a>
-            <a href="#vini" class="nav-item">Vini</a>
-            <a href="#birre" class="nav-item">Birre</a>
-        </nav>
     </header>
 
-    <!-- Contenu principal -->
-    <main class="main-content">
-        <!-- En-tête du menu -->
-        <div class="menu-header">
-            <h1 class="menu-title">Menù Bevande</h1>
-            <div class="menu-subtitle">L'eccellenza in ogni sorso</div>
+    <!-- Section principale -->
+    <section class="hero">
+        <div class="container">
+            <h1>Découvrez nos menus d'exception</h1>
+            <p>Plongez dans une expérience gastronomique unique avec nos menus soigneusement élaborés par nos chefs étoilés. Chaque plat est une œuvre d'art qui éveillera vos sens.</p>
         </div>
+    </section>
 
-        <!-- Section DISTILLATI -->
-        <section id="distillati" class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🥃</div>
-                <h2 class="section-title">Distillati</h2>
-            </div>
-
-            <!-- Whisky -->
-            <div class="subsection">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Whisky</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">CÀRN MÒR GLENBURGIE 2012 Bourbon Cask – Single Malt Scotch Whisky</div>
-                            <div class="product-price">€ 10,00</div>
-                        </div>
-                        <p class="product-description">Note morbide con crema pasticcera, vaniglia, nocciole tostate e limone. Finale lungo e bilanciato.</p>
+    <!-- Section des menus -->
+    <section class="menus-section">
+        <div class="container">
+            <h2 class="section-title">Nos Menus</h2>
+            
+            <div class="menus-grid">
+                <!-- Menu 1 -->
+                <div class="menu-card">
+                    <img src="Menu1.jpg" alt="Menu Dégustation" class="menu-img">
+                    <div class="menu-info">
+                        <h3 class="menu-title">Menu Dégustation</h3>
+                        <p class="menu-desc">Un voyage culinaire en 7 services, mettant en valeur les meilleurs produits de saison avec des accords mets-vins exclusifs.</p>
+                        <a href="#" class="menu-btn">Découvrir</a>
                     </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">MAC-TALLA Terra Single Malt Scotch Whisky</div>
-                            <div class="product-price">€ 9,00</div>
-                        </div>
-                        <p class="product-description">Note salate, affumicate, con sentori marini.</p>
+                </div>
+                
+                <!-- Menu 2 -->
+                <div class="menu-card">
+                    <img src="Menu2.jpg" alt="Menu Signature" class="menu-img">
+                    <div class="menu-info">
+                        <h3 class="menu-title">Menu Signature</h3>
+                        <p class="menu-desc">Les créations emblématiques de notre chef étoilé, un équilibre parfait entre tradition et innovation gastronomique.</p>
+                        <a href="#" class="menu-btn">Découvrir</a>
                     </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">LOST IRISH WHISKEY</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                        <p class="product-description">Whisky irlandese rotondo con note di frutta tropicale e vaniglia.</p>
+                </div>
+                
+                <!-- Menu 3 -->
+                <div class="menu-card">
+                    <img src="Menu3.jpg" alt="Menu Végétal" class="menu-img">
+                    <div class="menu-info">
+                        <h3 class="menu-title">Menu Végétal</h3>
+                        <p class="menu-desc">Une exploration des saveurs du jardin, où les légumes et herbes fraîches sont transformés en plats d'exception.</p>
+                        <a href="#" class="menu-btn">Découvrir</a>
                     </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">JACK DANIEL'S WHISKEY Old No.7</div>
-                            <div class="product-price">€ 5,00</div>
-                        </div>
-                        <p class="product-description">Aromi dolci, vaniglia e rovere americano.</p>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">JACK DANIEL'S HONEY</div>
-                            <div class="product-price">€ 5,00</div>
-                        </div>
-                        <p class="product-description">Whisky al miele, morbido e dolce.</p>
+                </div>
+                
+                <!-- Menu 4 -->
+                <div class="menu-card">
+                    <img src="Menu4.jpg" alt="Menu Royal" class="menu-img">
+                    <div class="menu-info">
+                        <h3 class="menu-title">Menu Royal</h3>
+                        <p class="menu-desc">Notre expérience gastronomique ultime, incluant des ingrédients rares et des préparations exclusives pour un repas inoubliable.</p>
+                        <a href="#" class="menu-btn">Découvrir</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Rum -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Rum</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">MOMBACHO 8Y RON</div>
-                            <div class="product-price">€ 5,00</div>
-                        </div>
-                        <p class="product-description">Rum nicaraguense, note dolci, morbide e aromatiche.</p>
-                    </div>
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Restaurant Royal</h3>
+                    <p>Depuis 1995, le restaurant Royal propose une cuisine raffinée dans un cadre élégant et chaleureux.</p>
+                    <p>Notre équipe de chefs étoilés vous accueille pour une expérience gastronomique inoubliable.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Horaires</h3>
+                    <p>Lundi - Vendredi: 12h-14h30 / 19h-22h30</p>
+                    <p>Samedi: 12h-15h / 19h-23h</p>
+                    <p>Dimanche: 12h-15h</p>
+                    <p>Réservation recommandée</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 18 Avenue de la Gastronomie, 75008 Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 1 42 76 85 90</p>
+                    <p><i class="fas fa-envelope"></i> contact@restaurant-royal.fr</p>
                     
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">CARIBBEAN SELECTION Rum Demerara & Trinidad</div>
-                            <div class="product-price">€ 4,00</div>
-                        </div>
-                        <p class="product-description">Rum speziato, note caramellate e rotonde.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Tequila & Mezcal -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Tequila & Mezcal</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">CURADO TEQUILA BLANCO BLUE AGAVE</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                        <p class="product-description">Tequila morbida con note erbacee.</p>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">CURADO TEQUILA CUPREATA</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                        <p class="product-description">Sentori intensi di terra e agave.</p>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">MEZCAL ARTESANAL BURRITO FIESTERO</div>
-                            <div class="product-price">€ 8,00</div>
-                        </div>
-                        <p class="product-description">Mezcal affumicato con note vegetali e speziate.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grappa -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Grappa</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">BERTAGNOLLI GRAPPA GRAN GRAPPA BIANCO</div>
-                            <div class="product-price">€ 4,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">BERTAGNOLLI GRAN GRAPPA BARRIQUE</div>
-                            <div class="product-price">€ 5,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">BERTAGNOLLI GRAPPA BARRIQUE K24 L'OLIO GOLD</div>
-                            <div class="product-price">€ 5,00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section AMARI E DIGESTIVI -->
-        <section id="amari" class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🍸</div>
-                <h2 class="section-title">Amari e Digestivi</h2>
             </div>
             
-            <div class="two-columns">
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Montenegro</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Amaro del Capo</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Jägermeister</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Baileys</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Borghetti</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Limoncello</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Sambuca</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Meletti / Varnelli</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="copyright">
+                <p>&copy; 2023 Restaurant Royal. Tous droits réservés.</p>
             </div>
-        </section>
-
-        <!-- Section BIRRE -->
-        <section id="birre" class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🍺</div>
-                <h2 class="section-title">Birre</h2>
-            </div>
-
-            <!-- Birre alla spina -->
-            <div class="subsection">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Birre alla Spina</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">PREMIUM PILS – Germania</div>
-                        </div>
-                        <p class="product-description">Chiara, equilibrata, fresca, 4.9%.</p>
-                        <div class="beer-size">
-                            <div class="size">0,3L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 4,50</div>
-                            </div>
-                        </div>
-                        <div class="beer-size">
-                            <div class="size">0,5L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 5,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">KELLER HELL – Germania</div>
-                        </div>
-                        <p class="product-description">Bionda, morbida, leggermente dolce, 5.1%.</p>
-                        <div class="beer-size">
-                            <div class="size">0,3L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 3,50</div>
-                            </div>
-                        </div>
-                        <div class="beer-size">
-                            <div class="size">0,5L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 5,50</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">KELLER DUNKEL – Germania</div>
-                        </div>
-                        <p class="product-description">Ambrata, note di malto tostato e caramello, 5.5%.</p>
-                        <div class="beer-size">
-                            <div class="size">0,4L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">TWISTED THISTLE IPA – Regno Unito</div>
-                        </div>
-                        <p class="product-description">Aromatica, floreale e fresca, 5.6%.</p>
-                        <div class="beer-size">
-                            <div class="size">0,3L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 4,50</div>
-                            </div>
-                        </div>
-                        <div class="beer-size">
-                            <div class="size">0,5L</div>
-                            <div class="size-price">
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Birre artigianali -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Birre Artigianali (in bottiglia & lattina)</h3>
-                <div class="two-columns">
-                    <div>
-                        <h4 style="color: #b8a577; font-size: 1.4rem; margin-bottom: 20px;">Germania</h4>
-                        <div class="products-grid">
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">HEFEWEIZEN HELL</div>
-                                    <div class="product-price">€ 4,00</div>
-                                </div>
-                            </div>
-                            
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">BOCK DUNKEL</div>
-                                    <div class="product-price">€ 4,00</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4 style="color: #b8a577; font-size: 1.4rem; margin-top: 30px; margin-bottom: 20px;">Padova – Rice Beer</h4>
-                        <div class="products-grid">
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">RICE BEER GLUTEN FREE</div>
-                                    <div class="product-price">€ 5,00</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 style="color: #b8a577; font-size: 1.4rem; margin-bottom: 20px;">Italia – Birrificio MC77</h4>
-                        <div class="products-grid">
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">SAN LORENZO BLANCHE</div>
-                                    <div class="product-price">€ 5,00</div>
-                                </div>
-                            </div>
-                            
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">APE REGINA BELGIAN ALE</div>
-                                    <div class="product-price">€ 6,00</div>
-                                </div>
-                            </div>
-                            
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">YAKIMA TRIP IPA</div>
-                                    <div class="product-price">€ 6,00</div>
-                                </div>
-                            </div>
-                            
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <div class="product-name">BREAKING HOPS DOUBLE IPA</div>
-                                    <div class="product-price">€ 6,00</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section BIBITE -->
-        <section class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🥤</div>
-                <h2 class="section-title">Bibite</h2>
-            </div>
-            
-            <div class="two-columns">
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Coca Cola / Coca Zero</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Fanta</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Schweppes Tonica / Limone</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Sibi Cedrata</div>
-                            <div class="product-price">€ 3,50</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Sibi Ginger Beer Bio</div>
-                            <div class="product-price">€ 4,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Sibi Soda Pompelmo Rosa Bio</div>
-                            <div class="product-price">€ 4,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Red Bull / Red Bull Tropical</div>
-                            <div class="product-price">€ 4,50</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Estathé Limone/Pesca</div>
-                            <div class="product-price">€ 3,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Acqua Naturale/Frizzante</div>
-                            <div class="product-price">€ 1,50</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section BOLLICINE -->
-        <section class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🍾</div>
-                <h2 class="section-title">Bollicine</h2>
-            </div>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Spumante Brut "Origine" – Metodo Classico</div>
-                        <div class="product-price">€ 18,00</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Spumante Brut Rosé "Origine" – Metodo Classico</div>
-                        <div class="product-price">€ 20,00</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Valdobbiadene DOCG Brut "Cuvée di Boi"</div>
-                        <div class="product-price">€ 22,00</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section VINI -->
-        <section id="vini" class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🍷</div>
-                <h2 class="section-title">Vini</h2>
-            </div>
-
-            <!-- Vini bianchi -->
-            <div class="subsection">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Vini Bianchi</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Verdicchio dei Castelli di Jesi Classico "Sera del Conte"</div>
-                            <div class="product-price">€ 15,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Verdicchio dei Castelli di Jesi Class. Sup. "Versiano"</div>
-                            <div class="product-price">€ 18,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Passerina IGT "San Basso"</div>
-                            <div class="product-price">€ 14,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Sauvignon Blanc "Campo della Cicala"</div>
-                            <div class="product-price">€ 18,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Garda DOC Pinot Bianco</div>
-                            <div class="product-price">€ 16,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Terre Siciliane IGT Inzolia "Kiké"</div>
-                            <div class="product-price">€ 20,00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vini rosati e rossi -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Vini Rosati e Rossi</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Rosato IGT "Itaka"</div>
-                            <div class="product-price">€ 15,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Terre Siciliane Rosato "Mahana"</div>
-                            <div class="product-price">€ 18,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Lacrima di Morro d'Alba DOC "Violletta"</div>
-                            <div class="product-price">€ 18,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Montepulciano d'Abruzzo DOC "Pancarada"</div>
-                            <div class="product-price">€ 16,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Sangiovese IGT "Melograno"</div>
-                            <div="product-price">€ 14,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Lambrusco Grasparossa "Vigneto Cialdini"</div>
-                            <div class="product-price">€ 18,00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section GIN & TONIC -->
-        <section class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🍸</div>
-                <h2 class="section-title">Gin & Tonic Selection</h2>
-            </div>
-            
-            <p style="color: #b8a577; font-style: italic; margin-bottom: 30px; font-size: 1.2rem;">Serviti con Indian Tonic Water SIBI</p>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Più Cinque Gin</div>
-                        <div class="product-price">€ 8,00</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Bulldog Gin / Malfy Gin Originale / Malfy Gin Rosa</div>
-                        <div class="product-price">€ 9,00</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Hendrick's Gin / N.3 London Dry</div>
-                        <div class="product-price">€ 9,00</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Hills & Harbour Gin / Electric Spirit Co. Achroous Gin</div>
-                        <div class="product-price">€ 10,00</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-name">Gin Mare</div>
-                        <div class="product-price">€ 8,00</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section COCKTAILS -->
-        <section id="cocktails" class="menu-section">
-            <div class="section-header">
-                <div class="section-icon">🍹</div>
-                <h2 class="section-title">Cocktails List</h2>
-            </div>
-
-            <!-- Signature -->
-            <div class="subsection">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Signature</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Fusetton – Bitter Fusetti, Sibi Soda Pompelmo Rosa</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Messicano – Bitter Fusetti Mexico, Vermouth Rosso, Soda</div>
-                            <div class="product-price">€ 7,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Palomito – Mezcal, Lime, Agave, Sibi Soda Pompelmo Rosa</div>
-                            <div class="product-price">€ 8,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Royal Fizz – Gin, Limone, Zucchero, Sibi Cedrata</div>
-                            <div class="product-price">€ 7,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Good Vibes – Vodka Premium, Chartreuse Verde, Passion Fruit, Lime, Ginger Beer</div>
-                            <div class="product-price">€ 8,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Basil Daiquiri – Rum Bianco, Lime, Zucchero, Basilico</div>
-                            <div class="product-price">€ 7,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Zapatero – Tequila, Lime, Sibi Ginger Beer</div>
-                            <div class="product-price">€ 7,00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Classici -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Classici</h3>
-                <div class="two-columns">
-                    <div class="products-grid">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Spritz</div>
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Americano / Negroni</div>
-                                <div class="product-price">€ 7,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Mojito</div>
-                                <div class="product-price">€ 7,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Moscow Mule</div>
-                                <div class="product-price">€ 7,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Gin Tonic / Lemon</div>
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Vodka Tonic / Lemon</div>
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="products-grid">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Vodka RedBull</div>
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Margarita</div>
-                                <div class="product-price">€ 7,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Long Island</div>
-                                <div class="product-price">€ 8,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Piña Colada</div>
-                                <div class="product-price">€ 7,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Cuba Libre / Jagerboom</div>
-                                <div class="product-price">€ 6,00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div class="product-name">Tequila Sunrise / Sex on the Beach / Japanese Iced Tea</div>
-                                <div class="product-price">€ 6-8,00</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analcolici -->
-            <div class="subsection" style="margin-top: 50px;">
-                <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #d4af37;">Analcolici</h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Fake Fuset* – Bitter 0.0, Sibi Soda Pompelmo Rosa</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Negroni 0.0 – Tanqueray 0.0, Bitter 0.0, Vermouth 0.0</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Non Sono Paloma – Smoky Agave 0.0, Sibi Soda Pompelmo Rosa</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-header">
-                            <div class="product-name">Una Pigna – Rum 0.0, Caraibos Pina Colada, Lime</div>
-                            <div class="product-price">€ 6,00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-logo">ROYAL</div>
-        <p class="footer-text">Un'esperienza sensoriale unica dove ogni drink racconta una storia di maestria, passione e eccellenza.</p>
-        
-      
-        <div class="copyright">
-            © 2023 ROYAL . TUTTI I DIRITTI RISERVATI.
         </div>
     </footer>
 
     <script>
-        // Gestion de la page de chargement
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingPage = document.getElementById('loading-page');
-            
-            setTimeout(function() {
-                loadingPage.style.opacity = '0';
-                loadingPage.style.visibility = 'hidden';
+        // Ajout d'un effet de défilement fluide pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                setTimeout(function() {
-                    loadingPage.style.display = 'none';
-                    
-                    // Animation des cartes de produit
-                    const cards = document.querySelectorAll('.product-card');
-                    cards.forEach((card, index) => {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        
-                        setTimeout(() => {
-                            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 100 + (index % 10) * 50);
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
                     });
-                    
-                }, 600);
-            }, 2000);
-            
-            // Navigation smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if(targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Effet au défilement
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('.main-header');
-                if (window.scrollY > 50) {
-                    header.style.background = 'rgba(10, 10, 10, 0.98)';
-                    header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.7)';
-                } else {
-                    header.style.background = 'rgba(10, 10, 10, 0.95)';
-                    header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
                 }
             });
+        });
+        
+        // Animation des cartes au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuCards = document.querySelectorAll('.menu-card');
             
-            console.log("Menu Royal - Design Premium caricato con successo!");
+            // Fonction pour vérifier si un élément est visible à l'écran
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9
+                );
+            }
+            
+            // Fonction pour gérer l'affichage des cartes
+            function handleScroll() {
+                menuCards.forEach(card => {
+                    if (isElementInViewport(card)) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Initialiser les cartes
+            menuCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // Vérifier au chargement
+            handleScroll();
+            
+            // Vérifier au défilement
+            window.addEventListener('scroll', handleScroll);
         });
     </script>
 </body>
