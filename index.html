@@ -1,528 +1,127 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal - Nos Menus</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Royal</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f8f5f0;
-            color: #333;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header et logo */
         header {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 25px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
         }
         
         .logo {
-            font-size: 2.8rem;
-            color: #d4af37;
-            font-weight: 700;
+            font-size: 48px;
+            font-weight: bold;
+            color: #b8860b;
             letter-spacing: 3px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #d4af37, #f7ef8a, #d4af37);
-            border-radius: 2px;
-        }
-        
-        .logo-subtitle {
-            font-size: 1rem;
-            color: #d4af37;
+        .royal-sub {
+            font-size: 18px;
+            color: #666;
+            margin-top: 10px;
             font-style: italic;
-            letter-spacing: 1px;
-            margin-top: 5px;
         }
         
-        /* Navigation */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: #d4af37;
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #d4af37;
-            transition: width 0.3s;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* Section principale */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            padding: 100px 20px;
-            margin-bottom: 60px;
-        }
-        
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: #f0f0f0;
-        }
-        
-        /* Section menus */
-        .menus-section {
-            padding: 40px 0 80px;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #1a1a1a;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
-            background-color: #d4af37;
-            border-radius: 2px;
-        }
-        
-        .menus-grid {
+        .menu-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .menu-card {
-            background-color: #fff;
-            border-radius: 12px;
+        .menu-item {
+            width: 100%;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.4s, box-shadow 0.4s;
-        }
-        
-        .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .menu-img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            height: auto;
             display: block;
-            transition: transform 0.5s;
+            transition: transform 0.3s ease;
         }
         
-        .menu-card:hover .menu-img {
-            transform: scale(1.05);
+        .menu-img:hover {
+            transform: scale(1.02);
         }
         
-        .menu-info {
-            padding: 25px;
-        }
-        
-        .menu-title {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            color: #1a1a1a;
-        }
-        
-        .menu-desc {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .menu-btn {
-            display: inline-block;
-            background-color: #d4af37;
-            color: #1a1a1a;
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        
-        .menu-btn:hover {
-            background-color: #c19b2c;
-            transform: translateY(-3px);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 50px 0 30px;
-            margin-top: 40px;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 30px;
-            padding: 0 15px;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: #d4af37;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: #d4af37;
-        }
-        
-        .footer-column p, .footer-column a {
-            color: #bbb;
-            margin-bottom: 10px;
-            display: block;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column a:hover {
-            color: #d4af37;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        
-        .social-icons a:hover {
-            background-color: #d4af37;
-        }
-        
-        .copyright {
+        .menu-label {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            color: #999;
-            font-size: 0.9rem;
+            padding: 15px;
+            font-size: 24px;
+            color: #333;
+            background-color: white;
+            font-style: italic;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .menus-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 25px;
+        @media (min-width: 768px) {
+            .menu-container {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
-        @media (max-width: 480px) {
-            .hero {
-                padding: 70px 15px;
+        @media (min-width: 1200px) {
+            .menu-container {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .menu-item {
+                height: 500px;
+                overflow: hidden;
             }
             
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .menus-grid {
-                grid-template-columns: 1fr;
+            .menu-img {
+                height: 85%;
+                object-fit: cover;
             }
         }
     </style>
 </head>
 <body>
-    <!-- En-tête avec logo -->
     <header>
-        <div class="container header-content">
-            <div class="logo-container">
-                <div>
-                    <div class="logo">Royal</div>
-                    <div class="logo-subtitle">Cuisine d'exception</div>
-                </div>
-            </div>
-            
-            <nav>
-                <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="#"><i class="fas fa-utensils"></i> Menus</a></li>
-                    <li><a href="#"><i class="fas fa-wine-glass-alt"></i> Carte des vins</a></li>
-                    <li><a href="#"><i class="fas fa-info-circle"></i> À propos</a></li>
-                    <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        <div class="logo">ROYAL</div>
+        <div class="royal-sub">I nostri menu</div>
     </header>
-
-    <!-- Section principale -->
-    <section class="hero">
-        <div class="container">
-            <h1>Découvrez nos menus d'exception</h1>
-            <p>Plongez dans une expérience gastronomique unique avec nos menus soigneusement élaborés par nos chefs étoilés. Chaque plat est une œuvre d'art qui éveillera vos sens.</p>
+    
+    <div class="menu-container">
+        <div class="menu-item">
+            <img src="Menu1.jpg" alt="Menu 1" class="menu-img">
+            <div class="menu-label">Menu 1</div>
         </div>
-    </section>
-
-    <!-- Section des menus -->
-    <section class="menus-section">
-        <div class="container">
-            <h2 class="section-title">Nos Menus</h2>
-            
-            <div class="menus-grid">
-                <!-- Menu 1 -->
-                <div class="menu-card">
-                    <img src="Menu1.jpg" alt="Menu Dégustation" class="menu-img">
-                    <div class="menu-info">
-                        <h3 class="menu-title">Menu Dégustation</h3>
-                        <p class="menu-desc">Un voyage culinaire en 7 services, mettant en valeur les meilleurs produits de saison avec des accords mets-vins exclusifs.</p>
-                        <a href="#" class="menu-btn">Découvrir</a>
-                    </div>
-                </div>
-                
-                <!-- Menu 2 -->
-                <div class="menu-card">
-                    <img src="Menu2.jpg" alt="Menu Signature" class="menu-img">
-                    <div class="menu-info">
-                        <h3 class="menu-title">Menu Signature</h3>
-                        <p class="menu-desc">Les créations emblématiques de notre chef étoilé, un équilibre parfait entre tradition et innovation gastronomique.</p>
-                        <a href="#" class="menu-btn">Découvrir</a>
-                    </div>
-                </div>
-                
-                <!-- Menu 3 -->
-                <div class="menu-card">
-                    <img src="Menu3.jpg" alt="Menu Végétal" class="menu-img">
-                    <div class="menu-info">
-                        <h3 class="menu-title">Menu Végétal</h3>
-                        <p class="menu-desc">Une exploration des saveurs du jardin, où les légumes et herbes fraîches sont transformés en plats d'exception.</p>
-                        <a href="#" class="menu-btn">Découvrir</a>
-                    </div>
-                </div>
-                
-                <!-- Menu 4 -->
-                <div class="menu-card">
-                    <img src="Menu4.jpg" alt="Menu Royal" class="menu-img">
-                    <div class="menu-info">
-                        <h3 class="menu-title">Menu Royal</h3>
-                        <p class="menu-desc">Notre expérience gastronomique ultime, incluant des ingrédients rares et des préparations exclusives pour un repas inoubliable.</p>
-                        <a href="#" class="menu-btn">Découvrir</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pied de page -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Restaurant Royal</h3>
-                    <p>Depuis 1995, le restaurant Royal propose une cuisine raffinée dans un cadre élégant et chaleureux.</p>
-                    <p>Notre équipe de chefs étoilés vous accueille pour une expérience gastronomique inoubliable.</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Horaires</h3>
-                    <p>Lundi - Vendredi: 12h-14h30 / 19h-22h30</p>
-                    <p>Samedi: 12h-15h / 19h-23h</p>
-                    <p>Dimanche: 12h-15h</p>
-                    <p>Réservation recommandée</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 18 Avenue de la Gastronomie, 75008 Paris</p>
-                    <p><i class="fas fa-phone"></i> +33 1 42 76 85 90</p>
-                    <p><i class="fas fa-envelope"></i> contact@restaurant-royal.fr</p>
-                    
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 Restaurant Royal. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Ajout d'un effet de défilement fluide pour les ancres
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
         
-        // Animation des cartes au chargement
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuCards = document.querySelectorAll('.menu-card');
-            
-            // Fonction pour vérifier si un élément est visible à l'écran
-            function isElementInViewport(el) {
-                const rect = el.getBoundingClientRect();
-                return (
-                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9
-                );
-            }
-            
-            // Fonction pour gérer l'affichage des cartes
-            function handleScroll() {
-                menuCards.forEach(card => {
-                    if (isElementInViewport(card)) {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }
-                });
-            }
-            
-            // Initialiser les cartes
-            menuCards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            });
-            
-            // Vérifier au chargement
-            handleScroll();
-            
-            // Vérifier au défilement
-            window.addEventListener('scroll', handleScroll);
-        });
-    </script>
+        <div class="menu-item">
+            <img src="Menu2.jpg" alt="Menu 2" class="menu-img">
+            <div class="menu-label">Menu 2</div>
+        </div>
+        
+        <div class="menu-item">
+            <img src="Menu3.jpg" alt="Menu 3" class="menu-img">
+            <div class="menu-label">Menu 3</div>
+        </div>
+        
+        <div class="menu-item">
+            <img src="Menu4.jpg" alt="Menu 4" class="menu-img">
+            <div class="menu-label">Menu 4</div>
+        </div>
+    </div>
 </body>
 </html>
