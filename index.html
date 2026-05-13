@@ -1,89 +1,179 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #f5f5f5;
-            padding: 2rem 1rem;
-            font-family: sans-serif;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .gallery img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            background: #eee; /* fond de secours si l'image manque */
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem auto;
-            flex-wrap: wrap;
-        }
-        button {
-            background: #2c3e50;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #1e2b38;
-        }
-        button.print-btn {
-            background: #c0392b;
-        }
-        button.print-btn:hover {
-            background: #a93226;
-        }
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            .buttons {
-                display: none;
-            }
-            .gallery {
-                gap: 0.5rem;
-            }
-            .gallery img {
-                box-shadow: none;
-                border-radius: 0;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg, #111, #222);
+    padding:30px 15px;
+    color:white;
+}
+
+/* TITRE MENU */
+h1{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:20px;
+    letter-spacing:2px;
+}
+
+/* SOUS TITRE */
+.subtitle{
+    text-align:center;
+    color:#bbb;
+    margin-bottom:30px;
+}
+
+/* GRID MENU */
+.gallery{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+/* CARTE MENU */
+.gallery img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border:2px solid rgba(255,255,255,0.1);
+}
+
+.gallery img:hover{
+    transform: scale(1.05);
+    box-shadow:0 15px 35px rgba(0,0,0,0.7);
+}
+
+/* BOUTONS */
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:30px auto;
+    flex-wrap:wrap;
+}
+
+button{
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+/* bouton normal */
+button{
+    background:#ffb703;
+    color:#111;
+}
+
+button:hover{
+    background:#ff8800;
+}
+
+/* bouton print */
+.print-btn{
+    background:#e63946;
+    color:white;
+}
+
+.print-btn:hover{
+    background:#c1121f;
+}
+
+/* LABEL SUR IMAGE (MENU STYLE) */
+.item{
+    position:relative;
+}
+
+.item span{
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    background:rgba(0,0,0,0.7);
+    padding:5px 10px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+/* PRINT MODE */
+@media print{
+    body{
+        background:white;
+        color:black;
+    }
+    button, .buttons{
+        display:none;
+    }
+    .gallery img{
+        box-shadow:none;
+        border:none;
+    }
+}
+</style>
+
 </head>
+
 <body>
-    <!-- Galerie d'images (modifiez les noms et le nombre) -->
-    <div class="gallery" id="menuGallery">
-        <img src="img1.png" alt="Image 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 1%3C/text%3E%3C/svg%3E'">
-        <img src="img2.png" alt="Image 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 2%3C/text%3E%3C/svg%3E'">
-        <img src="img3.png" alt="Image 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 3%3C/text%3E%3C/svg%3E'">
-        <img src="img4.png" alt="Image 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 4%3C/text%3E%3C/svg%3E'">
-        <img src="img5.png" alt="Image 5" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 5%3C/text%3E%3C/svg%3E'">
-        <img src="img6.png" alt="Image 6" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 6%3C/text%3E%3C/svg%3E'">
+
+<h1>🍽 MENU</h1>
+<div class="subtitle">Clique sur une image pour voir le plat</div>
+
+<div class="buttons">
+    <button onclick="window.print()">🖨 Imprimer</button>
+    <button class="print-btn" onclick="alert('Menu envoyé !')">📩 Commander</button>
+</div>
+
+<div class="gallery">
+
+    <div class="item">
+        <img src="img1.png">
+        <span>Plat 1</span>
     </div>
+
+    <div class="item">
+        <img src="img2.png">
+        <span>Plat 2</span>
+    </div>
+
+    <div class="item">
+        <img src="img3.png">
+        <span>Plat 3</span>
+    </div>
+
+    <div class="item">
+        <img src="img4.png">
+        <span>Plat 4</span>
+    </div>
+
+    <div class="item">
+        <img src="img5.png">
+        <span>Plat 5</span>
+    </div>
+
+    <div class="item">
+        <img src="img6.png">
+        <span>Plat 6</span>
+    </div>
+
+</div>
 
 </body>
 </html>
