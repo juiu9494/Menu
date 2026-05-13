@@ -1,139 +1,109 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal</title>
+    <title>Menu</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            padding: 20px;
+            background: #f5f5f5;
+            padding: 2rem 1rem;
+            font-family: sans-serif;
         }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 48px;
-            font-weight: bold;
-            color: #b8860b;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .royal-sub {
-            font-size: 18px;
-            color: #666;
-            margin-top: 10px;
-            font-style: italic;
-        }
-        
-        .menu-container {
+        .gallery {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1000px;
             margin: 0 auto;
         }
-        
-        .menu-item {
-            width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .menu-img {
+        .gallery img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #eee; /* fond de secours si l'image manque */
         }
-        
-        .menu-img:hover {
-            transform: scale(1.02);
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem auto;
+            flex-wrap: wrap;
         }
-        
-        .menu-label {
-            text-align: center;
-            padding: 15px;
-            font-size: 24px;
-            color: #333;
-            background-color: white;
-            font-style: italic;
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        
-        @media (min-width: 768px) {
-            .menu-container {
-                grid-template-columns: repeat(2, 1fr);
+        button:hover {
+            background: #1e2b38;
+        }
+        button.print-btn {
+            background: #c0392b;
+        }
+        button.print-btn:hover {
+            background: #a93226;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
             }
-        }
-        
-        @media (min-width: 1200px) {
-            .menu-container {
-                grid-template-columns: repeat(2, 1fr);
+            .buttons {
+                display: none;
             }
-            
-            .menu-item {
-                height: 500px;
-                overflow: hidden;
+            .gallery {
+                gap: 0.5rem;
             }
-            
-            .menu-img {
-                height: 85%;
-                object-fit: cover;
+            .gallery img {
+                box-shadow: none;
+                border-radius: 0;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">ROYAL</div>
-        <div class="royal-sub">I nostri menu</div>
-    </header>
-    
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="img1.png" alt="Menu 1" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
-        
-        <div class="menu-item">
-            <img src="img2.png" alt="Menu 2" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
-        
-        <div class="menu-item">
-            <img src="img3.png" alt="Menu 3" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
-
-        <div class="menu-item">
-            <img src="img4.png" alt="Menu 3" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
-        <div class="menu-item">
-            <img src="img5.png" alt="Menu 3" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
-        <div class="menu-item">
-            <img src="img6.png" alt="Menu 3" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
-        <div class="menu-item">
-            <img src="img7.png" alt="Menu 4" class="menu-img">
-            <div class="menu-label"></div>
-        </div>
+    <!-- Galerie d'images (modifiez les noms et le nombre) -->
+    <div class="gallery" id="menuGallery">
+        <img src="img1.png" alt="Image 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 1%3C/text%3E%3C/svg%3E'">
+        <img src="img2.png" alt="Image 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 2%3C/text%3E%3C/svg%3E'">
+        <img src="img3.png" alt="Image 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 3%3C/text%3E%3C/svg%3E'">
+        <img src="img4.png" alt="Image 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 4%3C/text%3E%3C/svg%3E'">
+        <img src="img5.png" alt="Image 5" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 5%3C/text%3E%3C/svg%3E'">
+        <img src="img6.png" alt="Image 6" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'20\'%3EImage 6%3C/text%3E%3C/svg%3E'">
     </div>
+
+    <div class="buttons">
+        <button onclick="downloadHTML()">📥 Télécharger le menu (HTML)</button>
+        <button class="print-btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
+    </div>
+
+    <script>
+        function downloadHTML() {
+            const doctype = '<!DOCTYPE html>\n';
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([doctype + html], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'menu.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
 </body>
 </html>
